@@ -1,0 +1,658 @@
+/*
+问卷设计制作工具
+*/
+
+
+/* 
+    Created on : 2016-12-3, 17:39:25
+    Author     : banu
+*/
+
+.survey_title {
+    cursor: pointer;
+}
+
+
+/* ------------------- 工具箱 --------------------- */
+
+#collapseOne button[class*="btn-default"] {
+    display: none;
+}
+
+#collapseOne a:hover>button {
+    display: block;
+}
+
+#theme_box .thumbnail {
+    position: relative;
+}
+
+#theme_selected {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: white;
+}
+
+
+/* 工具箱固定位置 */
+
+#head_toolbar {
+    width: 100%;
+}
+
+#head_toolbar>.container {
+    background-color: #EFEFEF;
+}
+
+.toolbar_fix {
+    position: fixed;
+    top: 80px;
+}
+
+#head_toolbar h2 {
+    display: none;
+    font-weight: lighter;
+}
+
+.head_toolbar_fix {
+    position: fixed;
+    top: 0;
+    z-index: 2000;
+    background-color: #EFEFEF;
+    box-shadow: 0px 2px 10px #000000;
+}
+
+.head_toolbar_fix h2 {
+    display: block;
+}
+
+#deletedQuestionList {
+    width: 90%;
+    position: absolute;
+    top: 0;
+    left: 5%;
+    z-index: 200;
+    background-color: #4a036f;
+    border-radius: .5em;
+    display: none;
+    overflow-y: auto;
+}
+
+#deletedQuestionList h4 {
+    color: white;
+    margin: 0 0.25em;
+    padding: 0.5em;
+    position: fixed;
+    width: 220px;
+    background-color: #4a036f;
+}
+
+#restoreQuestions {
+    width: 70%;
+    margin: -2em 5% 0.5em 5%;
+    padding: 1.5em 0.5em 1em 0.5em;
+    cursor: pointer;
+}
+
+.restore {
+    background-color: #4a036f;
+    color: white;
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+}
+
+.restore a {
+    color: white;
+}
+
+#noDeletedQuestions {
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+    padding-top: 2em;
+}
+
+#deletedQuestionBox {
+    overflow-y: auto;
+}
+
+#deletedQuestionBox ul {
+    margin: 3em 0 0 0;
+    padding: 0;
+}
+
+#deletedQuestionBox li {
+    list-style: none;
+    background-color: #f1dafe;
+    border-radius: .25em;
+    padding: .5em;
+    margin: .5em;
+    color: #868686;
+}
+
+#deletedQuestionBox li button {
+    display: none;
+}
+
+#deletedQuestionBox li:hover button {
+    display: block;
+}
+
+#deletedQuestionBox li h5 {
+    color: #4a036f;
+}
+
+
+/* ================================================================
+ *  ------------------- 主操作区 -------------------- 
+*/
+
+#survey_create_body {
+    background-color: #EFEFEF;
+}
+
+#survey_toolbox {
+    display: block;
+}
+
+#survey_toolbox .panel ul.list-group {
+    min-height: 400px;
+    overflow-x: hidden;
+}
+
+#survey_toolbox li a {
+    display: block;
+}
+
+#survey_workspace {
+    counter-reset: survey-counter-h4 survey-page-number;
+}
+
+.survey-page {
+    padding: 2em 0em;
+    position: relative;
+}
+
+.survey-page>.panel {
+    box-shadow: 0px 2px 10px #000000;
+    margin-top: 10px;
+}
+
+.survey-page-No:before {
+    content: "第"counter(survey-page-number)"页";
+}
+
+.survey-page-No {
+    counter-increment: survey-page-number;
+}
+
+.survey-page-head {
+    /*width: 100%;*/
+    height: 12em;
+    position: relative;
+    margin: -15px;
+    background-image: url("../../images/2144.jpg");
+    cursor: pointer;
+}
+
+.survey-page-head button {
+    position: absolute;
+    right: 15px;
+    top: 5em;
+    display: none;
+}
+
+.survey-page-head:hover button {
+    display: block;
+    z-index: 1000;
+}
+
+.survey-page .survey-page-head h1 {
+    background-color: #000000;
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 100%;
+    opacity: .65;
+}
+
+.survey-page h2 {
+    background-color: #612580;
+    font-size: 1.5em;
+}
+
+.survey-page h3 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.survey-page h2 button,
+.survey-page h3 button {
+    display: none;
+}
+
+.survey-page h2:hover button,
+.survey-page h3:hover button {
+    display: block;
+}
+
+.survey-page h1,
+.survey-page h2 {
+    color: white;
+    padding: 15px;
+    margin: 0 -15px;
+    cursor: pointer;
+}
+
+.survey-page h1 a,
+.survey-page h2 a {
+    color: white;
+}
+
+
+/*#survey_workspace h4:before {
+    content: counter(survey-counter-h4)".";
+    margin-right: 0.5em;
+}*/
+
+.required-asterisk {
+    color: #2b679a;
+}
+
+.question-number:after {
+    content: ". ";
+}
+
+#survey_workspace h4 {
+    color: #4A036F;
+    counter-increment: survey-counter-h4;
+    margin-left: -15px;
+    padding-left: 0;
+}
+
+.survey-page-body {
+    min-height: 100px;
+}
+
+.question-row {
+    position: relative;
+}
+
+.question-row fieldset {
+    margin: 1em 0.2em;
+    padding: 0.5em 1em;
+}
+
+.question-row:hover {
+    border: 1px dashed #210672;
+}
+
+.rq h4::after {
+    font-family: "FontAwesome";
+    content: '\f08d  必答';
+    color: #4a036f;
+    display: block;
+    float: right;
+    border-radius: .2em;
+    border: 1px solid #ff8040;
+    background-color: #ffc184;
+    font-size: .75em;
+    padding: .25em;
+}
+
+.buttons {
+    margin: 1em;
+}
+
+
+/* 问题区块 蒙板 */
+
+#question-mark {
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    filter: alpha(opacity=60);
+    background-color: #EEEEEE;
+    z-index: 1500;
+    opacity: 0.5;
+    -moz-opacity: 0.5;
+    padding: 0.5em 1em;
+}
+
+.survey-page-submit {
+    text-align: center;
+    padding: 1em;
+    position: relative;
+    cursor: pointer;
+}
+
+.survey-page-submit:hover {
+    border: 1px dashed #210672;
+}
+
+.survey-page-submit a {
+    display: none;
+    position: absolute;
+    right: 1em;
+    top: 1.5em;
+}
+
+.survey-page-submit:hover a {
+    display: block;
+}
+
+.question-toolbar {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    z-index: 1600;
+}
+
+.question-body-new {
+    text-align: center;
+    border: 1px dashed #210672;
+    margin: 0.2em;
+    padding: 1em;
+}
+
+.survey-page-new {
+    text-align: center;
+    padding: 1em;
+    margin: 1em 0em;
+    border: 1px dotted #333;
+    cursor: pointer;
+}
+
+.survey-page-new:hover {
+    background-color: white;
+    border: 1px dashed #210672;
+}
+
+
+/*    问题区块       */
+
+#editQuestion section {
+    margin: 1em;
+    background-color: white;
+}
+
+#editQuestion>.tab-content {}
+
+#que_type_change_btn {
+    min-width: 12em;
+    text-align: left;
+    display: inline-block;
+}
+
+#que_type_change_btn:after {
+    font-family: 'FontAwesome';
+    content: "\f0d7";
+    float: right;
+}
+
+
+/* 问题分页弹出建立工具菜单  */
+
+.page_builder_tip {}
+
+.page_builder_tip ul {
+    width: 26em;
+    margin: 0;
+    padding: 0;
+    clear: both;
+    float: left;
+}
+
+.page_builder_tip ul:first-child {
+    border-bottom: 1px solid #333;
+}
+
+.page_builder_tip li {
+    float: left;
+    list-style: none;
+    width: 12em;
+    margin: .25em .5em;
+    padding: .25em .5em;
+    border-radius: .25em;
+}
+
+.page_builder_tip li a {
+    display: block;
+}
+
+.page_builder_tip li:hover {
+    background-color: #CC9EE5;
+}
+
+.page_builder_tip li.upgrade {
+    background-color: #FFFFAF;
+}
+
+
+/* 拖放提示块 */
+
+#q_drag_icon {
+    text-align: center;
+    height: 4em;
+    width: 15em;
+    background-color: rgba(0, 0, 0, 1);
+    color: white;
+    font-size: 2.5em;
+    font-weight: bold;
+    line-height: 4em;
+    border: .1em dashed #4A036F;
+    box-shadow: .1em .1em .5em #000000;
+    border-radius: .2em;
+    text-shadow: .5em .5em .1em #000000;
+    position: absolute;
+    left: -1000em;
+    top: -1000em;
+    /*display: none;*/
+    pointer-events: none;
+}
+
+
+/* 问题插入位置预览 */
+
+.ins_pos_pre_box {
+    clear: both;
+    min-height: 100px;
+    border: .1em dashed #4A036F;
+    margin: 1em auto;
+    list-style: none;
+    text-align: center;
+    pointer-events: none;
+}
+
+
+/* Ajax操作状态提示 */
+
+#action-status-info {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* 页面逻辑操作 */
+
+#pageLogicContainer {
+    width: 100%;
+    padding: 1em .5em;
+    background-color: #ffffff;
+    border-radius: .2em;
+    display: none;
+}
+
+#pageLogicContainer .nav-tabs {
+    padding-left: .5em;
+}
+
+#pageLogicContainer .tab-content {
+    padding: 1em .5em 0em .5em;
+}
+
+#pageLogicContainer .tab-pane label {
+    display: block;
+}
+
+#plc-btn {
+    padding-left: 1em;
+}
+
+#questionsAffectedControls,
+#questionRandomList,
+#pagesAffectedControls,
+#pageRandomList {
+    display: none;
+}
+
+/* 页面其他操作 */
+
+#pageActionContainer {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    width: 95%;
+    border: 1px solid #808080;
+    padding: 2%;
+    top: 4em;
+    display: none;
+}
+
+#pageActionContainer .panel-body .deletePage label {
+    display: block;
+}
+
+#modal-survey-title,
+#modal-page-title,
+#modal-addImageDialog {
+    z-index: 2100;
+}
+
+
+/* 标志 新增、编辑、删除 */
+
+.top-logo-section {
+    width: 100%;
+    position: relative;
+    display: none;
+}
+
+.logo-actions {
+    position: absolute;
+    right: .5em;
+    display: none;
+}
+
+.top-logo-section:hover .logo-actions {
+    display: block;
+}
+
+.logo-container {
+    padding: 1em;
+}
+
+
+/* 问卷页脚导航：前后页及完成 */
+
+.survey-page:first-child .prev-button {
+    display: none;
+}
+
+.done-button {
+    display: none;
+}
+
+.survey-page:last-child .done-button {
+    display: inline-block;
+}
+
+.survey-page:last-child .next-button {
+    display: none;
+}
+
+.survey-footer {
+    cursor: pointer;
+    position: relative;
+}
+
+.survey-footer button {
+    position: absolute;
+    top: 2.5em;
+    right: 1em;
+    display: none;
+}
+
+.survey-footer:hover {
+    background-color: #bf89dc;
+}
+
+.survey-footer:hover button {
+    display: block;
+}
+
+
+/* =======================================================
+* 编辑状态相关: 各题型的编辑
+*  
+*  */
+
+tr .add {
+    font-size: 1.5em;
+    color: #008000;
+}
+
+tr .delete {
+    font-size: 1.5em;
+    color: #ae0000;
+}
+
+tbody>tr:first-child .delete {
+    display: none;
+}
+
+.input {
+    border: 1px solid #000;
+    min-height: 2em;
+    border-radius: .25em;
+    width:100%;
+    line-height: 1.5em;
+}
+
+#editRand + div.row ,
+#toggleReq + div{
+    display: none;
+}
+#editRand:checked + div.row ,
+#toggleReq:checked + div
+ {
+    display: block;
+}
+
+.choiceActions {
+    width: 5em;
+}
+.weightValue {
+    width: 5em;
+}
+
+// 开启和关闭下个(标签)子选项显示状态
+.sonOpt {
+    display: none;
+}
+.openSonOpt + .sonOpt {
+    display: none;
+}
+.openSonOpt:checked + .sonOpt {
+    display: block;
+}
+.closeSonOpt + .sonBox {
+    display: block;
+}
+.closeSonOpt:checked + .sonBox {
+    display: none;
+}

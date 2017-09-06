@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+
+/* 
+    Created on : 2017-4-5, 17:14:34
+    Author     : banu
+*/
+
+#header {
+    width: 100%;
+    background-color: #EBE3E0;
+}
+
+#footer {
+    width: 100%;
+    /* background-color: #EBE3E0;      */
+}
+
+#home_banner {
+    background: url("../images/chart_home01.jpg") no-repeat top;
+    background-color: #969DAF;
+    height: 600px;
+}
+
+#home_banner_img {
+    z-index: 900;
+    width: 100%;
+}
+
+#home_banner .container {
+    position: relative;
+    margin-top: 10em;
+}
+
+#home_banner .container h1 {
+    text-stroke: 1px #FFFFFF;
+    -webkit-text-stroke: 1px #FFFFFF;
+}
+
+#home_banner .container h1,
+#home_banner .container p {
+    text-shadow: 2px 2px 5px #FFFFFF;
+}
