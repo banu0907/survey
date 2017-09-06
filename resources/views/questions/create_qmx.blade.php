@@ -188,7 +188,7 @@
             <h6>列</h6>
             <div>
                 <label for="otherAmountPerQ">
-                    <input type="radio" name="otherAmount" id="otherAmountPerQ" value="per_question"> 整个问题使用一个备注
+                    <input type="radio" name="otherAmount" id="otherAmountPerQ" value="per_question" checked="checked"> 整个问题使用一个备注
                 </label>
                 <label for="otherAmountPerRow">
                     <input type="radio" name="otherAmount" id="otherAmountPerRow" value="per_row"> 每行一个备注

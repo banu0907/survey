@@ -1413,43 +1413,51 @@ function baler(question_type) {
         var rows;
         if ($("#switchToSRRS").prop("checked") === false) {
             $("#rows .choiceText").each(function() {
-                row.push($.trim($(this).html()));
+                row.push($.trim($(this).children(".input").html()));
             });
             rows = row.join("¶");
         }
         // 计算列
         var col = [];
         var cols;
-        $(".column .choiceText").each(function() {
-            var choiceText = $(this).children(".input").html();
-            var weightValue = $(this).children("input").val();
+        $(".column").each(function() {
+            var choiceText = $(this).find(".choiceText .input").html();
+            var weightValue = $(this).find(".weightValue input").val();
             col.push($.trim(choiceText) + "¦" + weightValue);
         });
         cols = col.join("¶");
         // 附加选项
         var exopt = [];
         if ($("#toggleMultipleChoice").prop("checked") === true) {
-            exopt.push("toggleMultipleChoice");
+            exopt.push("multipleChoice");
         }
         if ($("#editWeighted").prop("checked")) {
             exopt.push("editWeighted");
         }
         if ($("#editNA").prop("checked")) {
-            exopt.push("editNA");
+            var editNALabel = $("#editNALabel").html();
+            exopt.push("editNA¦" + editNALabel);
         }
         if ($("#editForcedRanking").prop("checked")) {
             exopt.push("editForcedRanking");
+        }
+        if ($("#toggleOtherField").prop("checked")) {
+            var otherAmount = $("input[name=\"otherAmount\"]:checked").val();
+            var otherLabel = $("#otherLabel").html();
+            exopt.push("otherField¦" + otherAmount + "¦" + otherLabel);
         }
         var exopts = exopt.join("¶");
         outText = "[row]" + rows + "§" + "[col]" + cols + "§" + exopts;
     };
 
+    // ------------------------------------------------
     // 选项标签页
     if ($('#toggleReq').prop('checked')) {
         inputOption.push("required");
     }
     outOption = inputOption.join('|');
 
+    // -------------------------------------------
     // 逻辑标签页
 
     exportData['text'] = outText;

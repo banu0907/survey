@@ -71,7 +71,7 @@ class  QuestionCoding extends Controller
                 $new_text = [
                     $que_type,
                     "item-" . $que_id,
-                    "item-" . $que_id . "-" . $id_num,
+                    "item-" . $que_id . "_" . $id_num,
                     $id_num,
                     $item
                 ];
@@ -79,5 +79,13 @@ class  QuestionCoding extends Controller
                 $que_show .= str_replace($old_text , $new_text , self::$tplText);
             }
             return $que_show;
+    }
+
+    static function qmx_c()
+    {
+        // 此题型过于复杂，直接组装，不用模版替换方法
+        
+
+        return "正在编写中.";
     }
 }
