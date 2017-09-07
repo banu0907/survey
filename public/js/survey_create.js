@@ -1428,6 +1428,9 @@ function baler(question_type) {
         cols = col.join("¶");
         // 附加选项
         var exopt = [];
+        if( $("#switchToSRRS").prop("checked") ){
+            exopt.push("switchToSRRS");
+        }
         if ($("#toggleMultipleChoice").prop("checked") === true) {
             exopt.push("multipleChoice");
         }
