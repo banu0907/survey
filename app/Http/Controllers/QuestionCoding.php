@@ -17,6 +17,7 @@ class  QuestionCoding extends Controller
     // public function __construct($question)
     // {
     // }
+
 /**
  * 问题显示用HTML编码生成输出
  * @param  [array] $question [description]
@@ -24,24 +25,32 @@ class  QuestionCoding extends Controller
  */
     static function show($question)
     {
-        self::$qId = $question["id"];
-        self::$qType = $question["type"];
+        self::$qId      = $question["id"];
+        self::$qType    = $question["type"];
         self::$qContent = $question["content"];
         // 读取问题类型横板数据库tools
-        $tplText = Tool::where('code',self::$qType)->first()->tpl_out;
-        self::$tplText = $tplText;
-        $show_text = call_user_func([__CLASS__,self::$qType."_c"]);
+        $tplText        = Tool::where('code',self::$qType)->first()->tpl_out;
+        self::$tplText  = $tplText;
+        $show_text      = call_user_func([__CLASS__,self::$qType."_c"]);
         return $show_text;
     }
 
-
+/**
+ * 编辑视图数据
+ * @param  [type] $question [description]
+ * @return [type]           [description]
+ */
 	static function edit($question)
 	{
-		
+        self::$qId      = $question["id"];
+        self::$qType    = $question["type"];
+        self::$qContent = $question["content"];
+        $editOut        = call_user_func([__CLASS__,self::$qType."_e"]);
+        return $editOut;
 	}
 
     /**
-     * 选择题 HTML编码
+     * 选择题 qmc
      * @return [type] [description]
      */
     static function qmc_c()
@@ -81,6 +90,25 @@ class  QuestionCoding extends Controller
             return $que_show;
     }
 
+    static function qmc_e()
+    {
+        // 对问题进行解构，分成条目
+        $longword = explode("§" , self::$qContent);
+        $clauses = explode("¶",$longword[0]);
+
+        if(!empty($longword[1])){
+            $addopts = explode("¶",$longword[1]);
+        } else {
+            $addopts = [];
+        }
+        return compact("clauses" ,"addopts");
+    }
+
+
+/**
+ * 矩阵评分题 qmx 
+ * @return [type] [description]
+ */
     static function qmx_c()
     {
         // 此题型过于复杂，直接组装，不用模版替换方法 
@@ -122,7 +150,8 @@ class  QuestionCoding extends Controller
                 $editForcedRanking = 1;         // 强制排名
             }
             if ($opt[$key][0] === "otherField") {
-                $otherField = $opt[$key][1];    // 备注（更多）种类
+                $otherField = 1;
+                $otherAmount = $opt[$key][1];    // 备注（更多）种类
                 $otherLabel = $opt[$key][2];    // 备注标签
             }
         }
@@ -178,19 +207,22 @@ class  QuestionCoding extends Controller
                 $tabBody .= str_replace($old_text,$new_text,self::$tplText);
                 $tabBody .= "</tr>\n";
                 //  每行一个备注栏
-                if ($otherField === "per_row") {
-                    $col_count = count($cols) + 1;
-                    if(isset($editNA)) $col_count ++;
-                    $tabBody .= "<tr><td colspan=\"" . $col_count . "\">" 
-                        . $otherLabel
-                        . "<input type=\"text\" id=\"item-".$que_id."_other\" name=\"". $que_id ."\" >"
-                        ."</td></tr>\n";
+                if(isset($otherField)){
+                    if ($otherAmount === "per_row") {
+                        $col_count = count($cols) + 1;
+                        if(isset($editNA)) $col_count ++;
+                        $tabBody .= "<tr><td colspan=\"" . $col_count . "\">" 
+                            . $otherLabel
+                            . "<input type=\"text\" id=\"item-".$que_id."_other\" name=\"". $que_id ."\" >"
+                            ."</td></tr>\n";
+                    }
                 }
 
             }
 
                 // 整个问题使用一个备注栏
-                if ($otherField === "per_question") {
+            if(isset($otherField)){
+                if ($otherAmount === "per_question") {
                     $col_count = count($cols) + 1;
                     if(isset($editNA)) $col_count ++;
                     $tabBody .= "<tr><td colspan=\"" . $col_count . "\">" 
@@ -198,6 +230,7 @@ class  QuestionCoding extends Controller
                         . "<input type=\"text\" id=\"item-".$que_id."_other\" name=\"". $que_id ."\" >"
                         ."</td></tr>\n";
                 }
+            }
 
         } else {
             // echo "<h3>单行</h3>\n";
@@ -239,5 +272,55 @@ class  QuestionCoding extends Controller
 
 
         return $tabText;
+    }
+
+
+    static function qmx_e()
+    {
+        $longword = explode("§", self::$qContent);
+        $rows     = explode("¶", str_replace("[row]","",$longword[0]));
+        $colTexts     = explode("¶", str_replace("[col]","",$longword[1]));
+        $cols      = [];
+        foreach ($colTexts as $key => $value) {
+            $colText = explode("¦",$value);
+            $cols[$key] = [
+                "text" => $colText[0],
+                "weight" => $colText[1]
+            ];
+        }
+        $opts = explode("¶",$longword[2]);
+        $addopts = [];
+        foreach ( $opts as $key => $value ) {
+            $opt[$key] = explode("¦",$value);
+            // 逐个选项分析
+            if($opt[$key][0] === "switchToSRRS"){
+                $addopts["switchToSRRS"] = 1;              // 设为单列
+            }
+            if($opt[$key][0] === "multipleChoice"){
+                $addopts["multipleChoice"] = 1;                // 允许多选
+            }
+            if ($opt[$key][0] === "editWeighted") {
+                $addopts["editWeighted"] = 1;      // 使用权重
+            }
+            if ($opt[$key][0] === "editNA") {
+                $addopts["editNA"] = 1;
+                $addopts["editNALabel"] = $opt[$key][1];        // 不适用栏标签
+            }
+            if ($opt[$key][0] === "editForcedRanking") {
+                $addopts["editForcedRanking"] = 1;         // 强制排名
+            }
+            if ($opt[$key][0] === "otherField") {
+                $addopts["otherField"] = 1;
+                $addopts["otherAmount"] = $opt[$key][1];    // 备注（更多）种类
+                $addopts["otherLabel"] = $opt[$key][2];    // 备注标签
+            }
+        }
+
+        return $optText = [
+            "rows" => $rows,
+            "cols" => $cols,
+            "addopts" => $addopts,
+        ];
+        // return compact("rows","cols","addopts");
     }
 }

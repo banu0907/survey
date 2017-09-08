@@ -55,9 +55,9 @@ class QuestionsController extends Controller
 
         // 转换问题内容编码为HTML显示内容
         $data = [
-            "id"=>$question->id,
-            "type"=>$question->question_type,
-            "content"=>$question->content,
+            "id"      => $question->id,
+            "type"    => $question->question_type,
+            "content" => $question->content,
         ];
         $question->content_show = QuestionCoding::show($data);
         // 存入数据表
@@ -71,19 +71,24 @@ class QuestionsController extends Controller
     {
         \Debugbar::disable();
         $question = Question::find($request->que_id);
-        // 对问题进行解构，分成条目
-        $longword = explode("§" , $question->content);
-        $clauses = explode("¶",$longword[0]);
-        $que_type = "radio";
-        if(!empty($longword[1])){
-            $addopts = explode("¶",$longword[1]);
-        } else {
-            $addopts = [];
-        }
-        
+
+        $data = [
+            "id"      => $question->id,
+            "type"    => $question->question_type,
+            "content" => $question->content,
+        ];
+        $editBody = QuestionCoding::edit($data);
+
         $toolname = Tool::where("code",$question->question_type)->first()->name;
         $template_file = 'questions.edit_'.$question->question_type;
-        return view($template_file , compact('question','clauses','addopts','toolname'));
+
+        $editHead = [
+            "question" => $question,
+            "toolname" => $toolname,
+        ];
+        $editOut =array_merge($editHead,$editBody);
+        return view($template_file , $editOut );
+        // return collect($editOut)->toJson();
     }
 
     public function update(Request $request)
