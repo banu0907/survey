@@ -88,7 +88,7 @@ class QuestionsController extends Controller
         ];
         $editOut =array_merge($editHead,$editBody);
         return view($template_file , $editOut );
-        // return collect($editOut)->toJson();
+        // return $editOut;
     }
 
     public function update(Request $request)

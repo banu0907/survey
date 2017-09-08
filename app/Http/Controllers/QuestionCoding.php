@@ -111,7 +111,7 @@ class  QuestionCoding extends Controller
  */
     static function qmx_c()
     {
-        // 此题型过于复杂，直接组装，不用模版替换方法 
+        // 此题型过于复杂，直接组装，只局部使用模版替换方法 
 
         $que_id = self::$qId;
         $items = explode("§",self::$qContent);

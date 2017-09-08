@@ -83,7 +83,7 @@
             <tr>
                 <td>
                     <div id="editNALabel" class="input{{ isset($addopts["editNA"]) ? "" : " hide" }}" contenteditable="true">
-                        {{ isset($addopts["editNALabel"]) ? $addopts["editNALabel"] : "" }}
+                        {{ isset($addopts["editNALabel"]) ? $addopts["editNALabel"] : "不适用" }}
                     </div>
                 </td>
             </tr>
@@ -138,16 +138,25 @@
         <div class="sonOpt">
             <h6>标签</h6>
             <div class="input" id="otherLabel" contenteditable="true">
-                {{ isset($addopts["otherLabel"]) ? $addopts["otherLabel"] : "" }}
+                {{ isset($addopts["otherLabel"]) ? $addopts["otherLabel"] : "其他" }}
             </div>
             <h6>列</h6>
             <div>
+            @if (isset($addopts["otherField"]))
                 <label for="otherAmountPerQ">
                     <input type="radio" name="otherAmount" id="otherAmountPerQ" value="per_question"{{ $addopts["otherAmount"]=="per_question" ? " checked=\"checked\"" : "" }}> 整个问题使用一个备注
                 </label>
                 <label for="otherAmountPerRow">
                     <input type="radio" name="otherAmount" id="otherAmountPerRow" value="per_row"{{ $addopts["otherAmount"]=="per_row" ? " checked=\"checked\"" : "" }}> 每行一个备注
                 </label>
+            @else
+                <label for="otherAmountPerQ">
+                    <input type="radio" name="otherAmount" id="otherAmountPerQ" value="per_question" checked="checked"> 整个问题使用一个备注
+                </label>
+                <label for="otherAmountPerRow">
+                    <input type="radio" name="otherAmount" id="otherAmountPerRow" value="per_row"> 每行一个备注
+                </label>
+            @endif
             </div>
         </div>
     </div>
