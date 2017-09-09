@@ -176,7 +176,8 @@ class  QuestionCoding extends Controller
             "{type}",
             "{name}",
             "{id}",
-            "{val}"
+            "{val}",
+            "{label}"
         ];
         // 首先判断是多行或单行的情况
         if ( empty( $switchToSRRS ) ) {
@@ -191,7 +192,8 @@ class  QuestionCoding extends Controller
                         $que_type,
                         "item-" . $que_id . "-" . $rowi,
                         "item-" . $que_id . "-" . $rowi . "_" . $coli,
-                        $coli
+                        $coli,
+                        $col[$i][0]
                     ];
                     $tabBody .= str_replace($old_text,$new_text,self::$tplText);
                 }
@@ -201,7 +203,8 @@ class  QuestionCoding extends Controller
                         $que_type,
                         "item-".$que_id . "-" . $rowi,
                         "item-".$que_id . "-" . $rowi. "_NA",
-                        "NA"
+                        "NA",
+                        $editNA
                     ];
                 }
                 $tabBody .= str_replace($old_text,$new_text,self::$tplText);
@@ -241,7 +244,8 @@ class  QuestionCoding extends Controller
                     $que_type,
                     "item-".$que_id,
                     "item-".$que_id."_".$id_num,
-                    $id_num
+                    $id_num,
+                    $col[$i][0]
                 ];
                 $tabBody .= str_replace($old_text,$new_text,self::$tplText);
             }
@@ -250,7 +254,8 @@ class  QuestionCoding extends Controller
                     $que_type,
                     "item-".$que_id,
                     "item-".$que_id."_NA",
-                    "NA"
+                    "NA",
+                    $editNA
                 ];
 
             }

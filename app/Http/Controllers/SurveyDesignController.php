@@ -21,7 +21,7 @@ class SurveyDesignController extends Controller
         
     }
 
-    //
+    // 设计主页面
     public function index(Survey $survey)
     {
         // 子页面显示
@@ -50,6 +50,33 @@ class SurveyDesignController extends Controller
         return view('survey_design.index',compact('survey','subpages','deletelist'));
         // return compact('survey','subpages');
     }
+
+/**
+ * 预览
+ * @param  Survey $survey [description]
+ * @return [type]         [description]
+ */
+    public function preview(Survey $survey)
+    {
+        // 子页面显示
+        $subpages = $survey->subpages()->orderBy('page_num','asc')->get()->map(function ($item,$key)
+        {
+            // $item->questions = SurveyPage::find($pageid)->questions()->orderBy('question_num','asc')->get()->toArray();
+            $item->questions = Question::where([
+                    ['survey_page_id',$item->id],
+                    ['deleted_flag',0]
+                ])
+                 ->orderBy('question_num','asc')->get();
+            return $item;
+
+        });
+
+        \Debugbar::info($subpages);
+
+        return view('survey_design.preview',compact('survey','subpages'));
+    }
+
+
     public function test()
     {
         $surveys = Survey::all();

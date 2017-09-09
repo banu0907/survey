@@ -1327,6 +1327,33 @@ $(function() {
     })
 
 
+/* ===========================================================
+ * 预览和测试窗口
+ * 
+ */
+    $("#previewButton").click(function () {
+        var preview_url = app_url + "/preview/" + survey_id;
+        window.open(preview_url,"survey_preview");
+        $("#preview_window").show();
+        return false;
+    });
+    $("#preview_window .nav-header .fa-close").click(function () {
+        $("#preview_window").hide();
+    });
+    $(".device-sizes li").click(function () {
+        $(this).addClass('active').siblings().removeClass('active');
+        var device = $(this).children("a").prop("class");
+        if (device === "desktop") {
+            $("#survey_preview").css("width","100%");
+        } else if (device === "tablet") {
+            $("#survey_preview").css("width","768px");
+        } else if (device === "phone") {
+            $("#survey_preview").css("width","320px");
+        }
+        return false;
+    });
+
+
     // =================================================================================
     //      问题和答案子项编辑操作
     // ---------------------------------------------------------------------------------

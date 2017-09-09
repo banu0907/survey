@@ -329,4 +329,22 @@
         </div>
     </div>
 
+    <!-- 预览与测试窗口 -->
+    <div id="preview_window">
+        <div class="nav-header">
+            <i class="fa fa-eye"></i>
+             预览与测试 
+            <i class="fa fa-close pull-right"></i>
+        </div>
+        <div id="survey_preview">
+            <iframe name="survey_preview"></iframe>
+        </div>
+        <nav class="nav-footer">
+            <ul class="device-sizes nav nav-pills">
+                <li class="active"><a href="#" class="desktop">桌面</a></li>
+                <li><a href="#" class="tablet">平板电脑</a></li>
+                <li><a href="#" class="phone">手机</a></li>
+            </ul>
+        </nav>
+    </div>
 @endsection

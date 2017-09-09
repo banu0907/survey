@@ -29,6 +29,7 @@ Route::resource('surveys', 'SurveysController');
 
 // 问卷设计页
 Route::get('create/{survey}', 'SurveyDesignController@index')->name('create');
+Route::get('preview/{survey}','SurveyDesignController@preview')->name('preview');
 Route::get('test', 'SurveyDesignController@test');
 
 Route::resource('surveypages', 'SurveyPagesController');

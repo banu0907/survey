@@ -4,7 +4,7 @@
     @if ($question->required_question)
         <span class="required-asterisk">*</span>
     @endif
-        <span class="question-number">{{ $question->num }}</span>
+        <span class="question-number">{{ $question->question_num }}</span>
         <span>{!! $question->title !!}</span>
     </h4>
     <div class="question-body">
