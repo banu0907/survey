@@ -341,9 +341,9 @@
         </div>
         <nav class="nav-footer">
             <ul class="device-sizes nav nav-pills">
-                <li class="active"><a href="#" class="desktop">桌面</a></li>
-                <li><a href="#" class="tablet">平板电脑</a></li>
-                <li><a href="#" class="phone">手机</a></li>
+                <li class="active"><a href="#" class="desktop"> <i class="fa fa-laptop fa-2x"></i> 桌面</a></li>
+                <li><a href="#" class="tablet"> <i class="fa fa-tablet fa-2x"></i> 平板电脑</a></li>
+                <li><a href="#" class="phone"> <i class="fa fa-mobile fa-2x"></i> 手机</a></li>
             </ul>
         </nav>
     </div>
