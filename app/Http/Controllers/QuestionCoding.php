@@ -157,7 +157,7 @@ class  QuestionCoding extends Controller
         }
         // print_r($opt);
 
-        $tabText = "<table class=\"table table-hover\">\n";
+        $tabText = "<table class=\"table table-hover table-reset\">\n";
         // ===========
         // 构建表头
         $tabText .= "<thead>\n<tr>\n<th>&nbsp;</th>\n";
@@ -237,7 +237,7 @@ class  QuestionCoding extends Controller
 
         } else {
             // echo "<h3>单行</h3>\n";
-            $tabBody = "<tr><td>&nbsp;</td>\n";
+            $tabBody = "<tr><td class=\"td-reset\">&nbsp;</td>\n";
             for ($i = 0; $i < count($cols); $i++) {
                 $id_num = $i+1;
                 $new_text = [

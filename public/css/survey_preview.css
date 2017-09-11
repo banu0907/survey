@@ -1,0 +1,102 @@
+/*.survey-page {
+	display: none;
+}
+.survey-page:first-child {
+	display: block;
+}*/
+.survey-page {
+	clear: both;
+}
+.survey-page:nth-child(n+2) {
+	display: none;
+}
+.survey-page footer {
+	text-align: center;
+}
+#endPreview {
+	display: none;
+	text-align: center;
+}
+#endPreview h1 {
+	margin: 3em auto 1em auto;
+}
+
+@media screen and (min-width: 768px) {
+
+	.question-header {
+		position: relative;
+		min-height: 10em;
+		overflow: hidden;
+		max-height: 300px;
+	}
+	.question-header h1 {
+		width: 90%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding: 1em 5%;
+	}
+
+	.table-reset tbody td label {
+		display: none;
+
+	}
+
+}
+
+
+@media screen and (max-width: 767px) {
+	.prev-button , .done-button , .next-button, #resetSurvey ,#closePreview {
+		display: block;
+		width: 100%;
+		margin: .5em auto;
+		
+	}	
+	.question-header img {
+		display: none;
+	}
+	.table-reset thead{
+		display: none;
+	}
+	.table-reset tbody {
+
+	}
+	.table-reset tbody th,
+	.table-reset tbody td {
+		float: left;
+		width: 100%;
+
+	}
+	.table-reset tbody th {
+
+	}
+	.table-reset tbody td {
+	}
+	.table-reset tbody td label {
+		display: inline-block;
+
+	}
+	.td-reset {
+		display: none;
+	}
+}
+
+
+
+/* 问卷页脚导航：前后页及完成 */
+
+.survey-page:first-child .prev-button {
+    display: none;
+}
+
+.done-button {
+    display: none;
+}
+
+.survey-page:last-child .done-button {
+    display: inline-block;
+}
+
+.survey-page:last-child .next-button {
+    display: none;
+}
