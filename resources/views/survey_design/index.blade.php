@@ -21,7 +21,7 @@
             <ul class="nav nav-tabs">
                 <li><a href="survey_summary.html">摘要</a></li>
                 <li class="active"><a href="#">设计调查问卷</a></li>
-                <li><a href="survey_collect.html">收集回复</a></li>
+                <li><a href="{{ route('collect',[$survey]) }}">收集回复</a></li>
                 <li><a href="survey_analyze.html">分析结果</a></li>
             </ul>
         </div>
