@@ -69,12 +69,12 @@
                         <div class="small">建立时间：{{ $survey->created_at }}</div>
                     </td>
                     <td>{{ $survey->updated_at }}</td>
-                    <td>0</td>
+                    <td>{{ $survey->replies_sum }}</td>
                     <td>
                         <a href="{{ route('create',$survey->id) }}"><i class="fa fa-edit"></i></a>
                     </td>
                     <td>
-                        <a href="#"><i class="fa fa-magnet"></i></a>
+                        <a href="{{ route('collect',$survey->id) }}"><i class="fa fa-paper-plane-o"></i></a>
                     </td>
                     <td>
                         <a href="#"><i class="fa fa-bar-chart"></i></a>

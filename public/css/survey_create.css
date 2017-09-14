@@ -257,7 +257,9 @@
 }*/
 
 .required-asterisk {
-    color: #2b679a;
+    color: #747AFE;
+    width: 1em;
+    display: inline-block;
 }
 
 .question-number:after {

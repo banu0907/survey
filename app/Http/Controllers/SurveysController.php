@@ -18,7 +18,7 @@ class SurveysController extends Controller
 
     public function index()
     {
-        $surveys = Auth::user()->surveys()->paginate(10);
+        $surveys = Auth::user()->surveys()->orderBy("updated_at","DESC")->paginate(10);
         return view('surveys.index',compact('surveys'));
     }
 

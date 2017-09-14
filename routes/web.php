@@ -46,5 +46,5 @@ Route::post('questions/sort', 'QuestionsController@sort');
 Route::post('questions/undel', 'QuestionsController@undel');
 
 // 问卷样本采集选项和发布
-Route::get('collect/{survey}', "CollectController@index")->name('collect');
-Route::get('collect/{survey}/edit', "CollectController@edit")->name('collect.edit');
+Route::get('collect/{survey}', "SurveyCollectController@index")->name('collect');
+Route::get('collect/{survey}/edit', "SurveyCollectController@edit")->name('collect.edit');
