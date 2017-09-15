@@ -12,7 +12,7 @@ class SurveyCollectController extends Controller
 	{
 		// 检查问卷为空时返回设计页
 		 if ($survey->questions()->count()<1) {
-			session()->flash("warning","您的问卷还没有设计任何问题，无法发布。");
+			session()->flash("warning","⚠️ &nbsp; 您的问卷还没有设计任何问题，无法发布。");
 		 	return redirect()->route("create",[$survey]);
 		 }
 		// 问卷最后修改时间
@@ -33,7 +33,7 @@ class SurveyCollectController extends Controller
 		 		$survey->published = date("Y-m-d h:i:s");
 		 		$survey->save();
 		 	}
-			session()->flash("success","关于问卷生成的信息提示。");
+			session()->flash("success","✅ &nbsp; 问卷『". $survey->survey ."』已生成发布。请设置回复选项。");
 		};
 		return redirect()->route("collect.edit",[$survey]);
 	}

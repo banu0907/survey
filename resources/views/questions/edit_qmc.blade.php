@@ -25,9 +25,7 @@
                                     <input type="{{ in_array("mcp", $addopts) ? "checkbox" : "radio" }}" disabled="disabled">
                                 </td>
                                 <td>
-                                    <div class="input" contenteditable="true">
-                                        {{ $clause }}
-                                    </div>
+                                    <div class="input" contenteditable="true">{{ $clause }}</div>
                                 </td>
                                 <td>
                                     <a class="add" href="#">

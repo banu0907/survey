@@ -206,8 +206,8 @@ class  QuestionCoding extends Controller
                         "NA",
                         $editNA
                     ];
+                    $tabBody .= str_replace($old_text,$new_text,self::$tplText);
                 }
-                $tabBody .= str_replace($old_text,$new_text,self::$tplText);
                 $tabBody .= "</tr>\n";
                 //  每行一个备注栏
                 if(isset($otherField)){
@@ -216,7 +216,7 @@ class  QuestionCoding extends Controller
                         if(isset($editNA)) $col_count ++;
                         $tabBody .= "<tr><td colspan=\"" . $col_count . "\">" 
                             . $otherLabel
-                            . "<input type=\"text\" id=\"item-".$que_id."_other\" name=\"". $que_id ."\" >"
+                            . "<input type=\"text\" id=\"item-".$que_id.  "-" . $rowi."_other\" name=\"". $que_id ."\" >"
                             ."</td></tr>\n";
                     }
                 }
@@ -257,9 +257,9 @@ class  QuestionCoding extends Controller
                     "NA",
                     $editNA
                 ];
-
+                $tabBody .= str_replace($old_text,$new_text,self::$tplText);
             }
-            $tabBody .= str_replace($old_text,$new_text,self::$tplText);
+
             $tabBody .= "</tr>\n";
             // 备注栏
             if (isset($otherField)) {

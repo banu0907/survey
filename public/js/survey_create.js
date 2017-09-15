@@ -1465,7 +1465,7 @@ function baler(question_type) {
             exopt.push("editWeighted");
         }
         if ($("#editNA").prop("checked")) {
-            var editNALabel = $("#editNALabel").html();
+            var editNALabel = $.trim( $("#editNALabel").html() );
             exopt.push("editNA¦" + editNALabel);
         }
         if ($("#editForcedRanking").prop("checked")) {
@@ -1473,7 +1473,7 @@ function baler(question_type) {
         }
         if ($("#toggleOtherField").prop("checked")) {
             var otherAmount = $("input[name=\"otherAmount\"]:checked").val();
-            var otherLabel = $("#otherLabel").html();
+            var otherLabel = $.trim( $("#otherLabel").html() );
             exopt.push("otherField¦" + otherAmount + "¦" + otherLabel);
         }
         var exopts = exopt.join("¶");

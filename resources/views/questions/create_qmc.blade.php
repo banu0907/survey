@@ -23,9 +23,7 @@
                                     <input type="radio" name="" id="" disabled="disabled">
                                 </td>
                                 <td>
-                                    <div class="input" contenteditable="true">
-                                        选项一
-                                    </div>
+                                    <div class="input" contenteditable="true"></div>
                                 </td>
                                 <td>
                                     <a class="add" href="#">
@@ -41,9 +39,7 @@
                                     <input type="checkbox" name="" id="" disabled="disabled">
                                 </td>
                                 <td>
-                                    <div class="input" contenteditable="true">
-                                        选项二
-                                    </div>
+                                    <div class="input" contenteditable="true"></div>
                                 </td>
                                 <td>
                                     <a class="add" href="#">

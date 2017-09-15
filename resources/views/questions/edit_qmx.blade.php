@@ -82,9 +82,7 @@
             
             <tr>
                 <td>
-                    <div id="editNALabel" class="input{{ isset($addopts["editNA"]) ? "" : " hide" }}" contenteditable="true">
-                        {{ isset($addopts["editNALabel"]) ? $addopts["editNALabel"] : "不适用" }}
-                    </div>
+                    <div id="editNALabel" class="input{{ isset($addopts["editNA"]) ? "" : " hide" }}" contenteditable="true">{{ isset($addopts["editNALabel"]) ? $addopts["editNALabel"] : "不适用" }}</div>
                 </td>
             </tr>
         </tbody>
@@ -137,9 +135,7 @@
         <input type="checkbox" name="toggleOtherField" id="toggleOtherField" value="1" class="pull-left openSonOpt"{{ isset($addopts["otherField"]) ? " checked=\"checked\" " : "" }}>
         <div class="sonOpt">
             <h6>标签</h6>
-            <div class="input" id="otherLabel" contenteditable="true">
-                {{ isset($addopts["otherLabel"]) ? $addopts["otherLabel"] : "其他" }}
-            </div>
+            <div class="input" id="otherLabel" contenteditable="true">{{ isset($addopts["otherLabel"]) ? $addopts["otherLabel"] : "其他" }}</div>
             <h6>列</h6>
             <div>
             @if (isset($addopts["otherField"]))

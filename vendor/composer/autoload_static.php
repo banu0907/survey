@@ -293,7 +293,7 @@ class ComposerStaticInit47a0a6e9fad1910a9ef8c823846af767
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
-        'App\\Http\\Controllers\\CollectController' => __DIR__ . '/../..' . '/app/Http/Controllers/CollectController.php',
+        'App\\Http\\Controllers\\SurveyCollectController' => __DIR__ . '/../..' . '/app/Http/Controllers/SurveyCollectController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\QuestionCoding' => __DIR__ . '/../..' . '/app/Http/Controllers/QuestionCoding.php',
         'App\\Http\\Controllers\\QuestionsController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuestionsController.php',
