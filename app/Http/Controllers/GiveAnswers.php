@@ -110,7 +110,6 @@ class GiveAnswers extends Controller
             $tabBody = "";
             foreach ($rows as $ri => $item) {
                 $rowi = $ri + 1;
-
                 for ($i = 0; $i < count($cols); $i++) {
 	            	$overall_i ++;
                     $coli = $i + 1;
@@ -159,7 +158,6 @@ class GiveAnswers extends Controller
 
         } else {
             // echo "<h3>单行</h3>\n";
-            $tabBody = "<tr><td class=\"td-reset\">&nbsp;</td>\n";
             for ($i = 0; $i < count($cols); $i++) {
                 $id_num = $i+1;
                 $overall_i ++;

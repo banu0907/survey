@@ -71,10 +71,10 @@
                     <td>{{ $survey->updated_at }}</td>
                     <td>{{ $survey->replies_sum }}</td>
                     <td>
-                        <a href="{{ route('create',$survey->id) }}"><i class="fa fa-edit"></i></a>
+                        <a href="{{ route('create',$survey->id) }}" data-toggle="tooltip" title="编辑调查问卷"><i class="fa fa-edit"></i></a>
                     </td>
                     <td>
-                        <a href="{{ route('collect',$survey->id) }}"><i class="fa fa-paper-plane-o"></i></a>
+                        <a href="{{ route('collect',$survey->id) }}" data-toggle="tooltip" title="发布调查问卷"><i class="fa fa-paper-plane-o"></i></a>
                     </td>
                     <td>
                         <a href="#"><i class="fa fa-bar-chart"></i></a>
