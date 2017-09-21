@@ -51,6 +51,6 @@ class SurveyCollectController extends Controller
 
 	public function update(Survey $survey)
 	{
-		
+		return "true";
 	}
 }
