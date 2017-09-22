@@ -10,6 +10,9 @@
      right: 2em;
      display: none;
   }
+  .hide-input {
+    display: none;
+  }
 </style>
   <script type="text/javascript">
     var app_url   = "{{ url('/') }}";
@@ -158,10 +161,11 @@
     <div id="collapse-5" class="panel-collapse collapse">
       <div class="panel-body">
         <p>
-          <label><input type="radio" name="cutoff-date" id="" value="true">
+          <label>
+            <input type="radio" name="cutoff-date" id="" value="true">
           开启，在指定日期与时间关闭。
           </label>
-          <div>
+          <div id="cutoff-input" class="hide-input">
             <input type="text" name="cutoff_datepicker" id="cutoff_datepicker">
           </div>
         </p>
@@ -189,7 +193,7 @@
             <input type="radio" name="max-responses" id="" value="true">
             开启，在收集到指定的回覆数量之后关闭。
           </label>
-          <div>
+          <div id="max-responses-input" class="hide-input">
             输入最大回覆数字
             <input type="text" name="max-response-count" id="max-response-count">
           </div>
@@ -218,7 +222,7 @@
             <input type="radio" name="ipaccess" id="" value="blacklist">
             开启，封锁指定 IP 地址的电脑，使其无法回复你的调查问卷
           </label>
-          <div>
+          <div id="ip-b" class="hide-input">
             <textarea name="blacklist" id="ip-blacklist" cols="60" rows="5"></textarea>
           </div>
         </p>
@@ -227,7 +231,7 @@
             <input type="radio" name="ipaccess" id="" value="whitelist">
           开启，允许指定 IP 地址的电脑回复您的问卷。
           </label>
-          <div>
+          <div id="ip-w" class="hide-input">
             <textarea name="blacklist" id="ip-whitelist" cols="60" rows="5"></textarea>
           </div>
         </p>
