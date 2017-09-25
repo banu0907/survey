@@ -2,6 +2,7 @@
 @section('title','数据采集与发布')
 @section('head_file')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="{{ url('/') }}/css/ecalendar.css">
 <style type="text/css">
   #collect_up_info {
      position: fixed;
@@ -14,6 +15,7 @@
     display: none;
   }
 </style>
+  <script type="text/javascript" src="{{ url('/') }}/js/Ecalendar.jquery.min.js"></script>
   <script type="text/javascript">
     var app_url   = "{{ url('/') }}";
     var survey_id = {{ $survey->id }};
@@ -49,7 +51,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapse-1">
-          多次回覆：
+          多次回复：
         </a>
       </h4>
     </div>
@@ -166,13 +168,13 @@
           开启，在指定日期与时间关闭。
           </label>
           <div id="cutoff-input" class="hide-input">
-            <input type="text" name="cutoff_datepicker" id="cutoff_datepicker">
+            <input type="text" name="cutoff_datepicker" id="cutoff_datepicker" class="date">
           </div>
         </p>
         <p>
           <label>
             <input type="radio" name="cutoff-date" id="" checked="checked" value="false">
-            关闭，接受回覆，直到你手动关闭为止。
+            关闭，接受回复，直到你手动关闭为止。
           </label>
         </p>
       </div>
@@ -182,7 +184,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapse-6">
-          设定可接受的回覆数量上限
+          设定可接受的回复数量上限
         </a>
       </h4>
     </div>
@@ -191,17 +193,17 @@
         <p>
           <label>
             <input type="radio" name="max-responses" id="" value="true">
-            开启，在收集到指定的回覆数量之后关闭。
+            开启，在收集到指定的回复数量之后关闭。
           </label>
           <div id="max-responses-input" class="hide-input">
-            输入最大回覆数字
+            输入最大回复数字
             <input type="text" name="max-response-count" id="max-response-count">
           </div>
         </p>
         <p>
           <label>
             <input type="radio" name="max-responses" id="" checked="checked" value="false">
-          关闭，接受回覆，直到你手动关闭为止。
+          关闭，接受回复，直到你手动关闭为止。
           </label>
         </p>
       </div>
@@ -223,7 +225,7 @@
             开启，封锁指定 IP 地址的电脑，使其无法回复你的调查问卷
           </label>
           <div id="ip-b" class="hide-input">
-            <textarea name="blacklist" id="ip-blacklist" cols="60" rows="5"></textarea>
+            <textarea name="blacklist" id="ip-blacklist" cols="60" rows="5" class="ip-list"></textarea>
           </div>
         </p>
         <p>
@@ -232,13 +234,13 @@
           开启，允许指定 IP 地址的电脑回复您的问卷。
           </label>
           <div id="ip-w" class="hide-input">
-            <textarea name="blacklist" id="ip-whitelist" cols="60" rows="5"></textarea>
+            <textarea name="whitelist" id="ip-whitelist" cols="60" rows="5" class="ip-list"></textarea>
           </div>
         </p>
         <p>
           <label>
             <input type="radio" name="ipaccess" id="" checked="checked" value="off">
-          关闭，不限制任何 IP 地址回覆调查问卷。
+          关闭，不限制任何 IP 地址回复调查问卷。
           </label>
         </p>
       </div>
@@ -248,7 +250,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion" href="#collapse-8">
-          疗程式回覆：
+          疗程调查式回复：
         </a>
       </h4>
     </div>
@@ -256,7 +258,7 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="course" id="" value="false">
+            <input type="radio" name="course" id="" value="false" checked="checked">
             不使用疗程式回复
           </label>
         </p>
@@ -267,18 +269,20 @@
           </label>
         </p>
 
-        <blockquote>
+        <blockquote id="treatment" class="hide-input">
             <p>
               周期总时间长度
-              <input type="text" name="total_days" id="total_days">
+              <input type="text" name="total_days" id="total_days" value="0">
+              天
             </p>
             <p>
-              回覆频率
-              <input type="text" name="frequency" id="frequency">
+              回复频率
+              <input type="text" name="frequency" id="frequency" value="0">
+              天
             </p>
             <p>
               <label>
-                <input type="radio" name="initial" id="" value="first">
+                <input type="radio" name="initial" id="" value="first" checked="checked">
               疗程记录开始时间以第一次答卷开始算起
               </label>
             </p>
@@ -287,8 +291,8 @@
                 <input type="radio" name="initial" id="" value="custom">
                 疗程记录开始时间由受访者自定
               </label>
-              <div>
-                <input type="text" name="start_time" id="start_time">
+              <div id="custom_time" class="hide-input">
+                <input type="text" name="start_time" id="start_time" class="date">
               </div>
             </p>
           </blockquote>

@@ -49,8 +49,50 @@ class SurveyCollectController extends Controller
 		return view("collect.edit",compact('survey'));
 	}
 
-	public function update(Survey $survey)
+	public function update(Survey $survey,Request $request)
 	{
-		return "true";
+        $data = [];
+        if ($request->allow_multiple_responses) {
+            $data["multiple_responses"] = $request->allow_multiple_responses;
+        }
+        if($request->edit_responses) {
+            $data["edit_responses"] = $request->edit_responses;
+        }
+        if ($request->make_anonymous) {
+        	$data["make_anonymous"] = $request->make_anonymous;
+        }
+        if ($request->instant_results) {
+        	$data["instant_results"] = $request->instant_results;
+        }
+        if ($request->end_time) {
+        	$end_time = $request->end_time;
+        	if($end_time == "false") {
+        		$end_time = NULL;
+        	}
+        	$data["end_time"] = $end_time;
+        }
+
+        if ($request->max_responses) {
+        	$max_responses = $request->max_responses;
+        	if($max_responses == "false") {
+        		$max_responses = NULL;
+        	}
+        	$data["max_responses"] = $max_responses;
+        }
+
+        if ($request->ipaccess) {
+        	$ipaccess = $request->ipaccess;
+        	if ($ipaccess == "false") {
+        		$ipaccess = NULL;
+        		$data["ip_list"] = NULL;
+        	} else {
+        		$data["ip_list"] = $request->ip_list;
+        	}
+        	$data["ipaccess"] = $ipaccess;
+        }
+
+        $updated = $survey->update($data);
+        // return compact('data','end_time');
+        return $updated ? "true" : "false";
 	}
 }

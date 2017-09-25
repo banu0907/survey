@@ -45,3 +45,8 @@ and open the template in the editor.
 #home_banner .container p {
     text-shadow: 2px 2px 5px #FFFFFF;
 }
+
+.super-icon {
+    font-size: 10em;
+    display: block;
+}

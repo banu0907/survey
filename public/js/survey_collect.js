@@ -16,9 +16,23 @@ $(function () {
     });
 */
 
+
+
+	$("#start_time").ECalendar({
+			 type:"time",
+			 stamp:false,
+			 skin:5,
+			 format:"yyyy年mm月dd日 hh时ii分",
+			 callback:function(v,e)
+			 {
+				 // $(".callback span").html(v)
+				 console.log(v+ "\n"+e);
+			 }
+	});
+
 	// 多次回覆
 	$("input[name=\"allow_multiple_responses\"]").click(function () {
-		var allow_multiple_responses = val2num($(this).val()) ;
+		var allow_multiple_responses = $(this).val() ;
 		console.log(allow_multiple_responses);
 		// alert(allow_multiple_responses);
 		$.ajax({
@@ -84,7 +98,7 @@ $(function () {
 
 	// 即时结果
 	$("input[name=\"instant-results\"]").click(function () {
-		var instant_results = val2num($(this).val());
+		var instant_results = $(this).val();
 		$.ajax({
 			url: app_url + '/collect/' + survey_id,
 			type: 'POST',
@@ -104,8 +118,8 @@ $(function () {
 
 	// 截止日期与时间
 	$("input[name=\"cutoff-date\"]").click(function () {
-		var cutoff_date = val2num($(this).val());
-		if(cutoff_date){
+		var cutoff_date = $(this).val();
+		if(cutoff_date === "true" ){
 			$("#cutoff-input").show();
 			// console.log('show');
 		} else {
@@ -116,7 +130,7 @@ $(function () {
 				type: 'POST',
 				dataType: 'json',
 				data: {
-					cutoff_date: cutoff_date
+					end_time: cutoff_date
 				},
 				success:function(data){
 					if (data == true) {
@@ -129,16 +143,46 @@ $(function () {
 		}
 	});
 
-	$("#cutoff_datepicker").change(function () {
-		var cutoff_date = $(this).val();
-		console.log('时间输入已改变' + cutoff_date);
 
+	// 日期控件
+	var end_time;
+	$("#cutoff_datepicker").ECalendar({
+			 type:"time",
+			 stamp:false,
+			 skin:5,
+			 format:"yyyy-mm-dd hh:ii",
+			 callback:function(v,e)
+			 {
+				 console.log(v+ "\n"+e);
+				end_time = String(v);
+				$.ajax({
+					url: app_url + '/collect/' + survey_id,
+					type: 'POST',
+					dataType: 'json',
+					data: {
+						end_time: end_time
+					},
+					success:function(data){
+						if (data == true) {
+							$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+						} else {
+							alert("更新设置失败");
+						};
+					}
+				});
+			 }
 	});
+
+	// $("#cutoff_datepicker").change(function () {
+	// 	var cutoff_date = $(this).val();
+	// 	console.log('时间输入已改变' + cutoff_date);
+
+	// });
 
 	// 回复数量上限
 	$("input[name=\"max-responses\"]").click(function () {
-		var max_responses = val2num( $(this).val() );
-		if (max_responses) {
+		var max_responses = $(this).val();
+		if (max_responses === "true") {
 			$("#max-responses-input").show();
 		} else {
 			$("#max-responses-input").hide();
@@ -163,20 +207,135 @@ $(function () {
 	$("#max-response-count").change(function () {
 		var max_responses = $(this).val();
 		console.log('回复数量上限已改变：' + max_responses);
+		$.ajax({
+			url: app_url + '/collect/' + survey_id,
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				max_responses: max_responses
+			},
+			success:function(data){
+				if (data == true) {
+					$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+				} else {
+					alert("更新设置失败");
+				};
+			}
+		});
 	});
 
 	// IP 限制
 	$("input[name=\"ipaccess\"]").click(function () {
 		var ipaccess = $(this).val();
-		
+		if (ipaccess === "blacklist") {
+			$("#ip-b").show();
+			$("#ip-w").hide();
+		} else if (ipaccess === "whitelist") {
+			$("#ip-w").show();
+			$("#ip-b").hide();
+		} else {
+			$("#ip-b,#ip-w").hide();
+			$.ajax({
+				url: app_url + '/collect/' + survey_id,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					ipaccess: "false"
+				},
+				success:function(data){
+					if (data == true) {
+						$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+					} else {
+						alert("更新设置失败");
+					};
+				}
+			});
+		}
+	});
+
+	$(".ip-list").change(function () {
+		var ip_list = $(this).val();
+		var ipaccess = $(this).prop("name");
+		$.ajax({
+			url: app_url + '/collect/' + survey_id,
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				ipaccess: ipaccess,
+				ip_list: ip_list
+			},
+			success:function(data){
+				if (data == true) {
+					$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+				} else {
+					alert("更新设置失败");
+				};
+			}
+		});
+
 	});
 
 
+	// 疗程式问卷设置
+	$("input[name=\"course\"]").click(function () {
+		var course = $(this).val();
+		if (course === "true") {
+			$("#treatment").show();
+		} else {
+			$("#treatment").hide();
+			$.ajax({
+				url: app_url + '/collect/' + survey_id,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					course: course
+				},
+				success:function(data){
+					if (data == true) {
+						$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+					} else {
+						alert("更新设置失败");
+					};
+				}
+			});
+		}
+	});
+
+	var total_days = 0;
+	$("#total_days").change(function () {
+		total_days = Number($(this).val());
+		if ( /^\d+$/.test(total_days) && total_days>0 ) {
+			alert(total_days);
+		} else {
+			total_days = 0;
+		};
+	});
+
+	$("#frequency").change(function () {
+		var frequency = Number($(this).val());
+		if( /^\d+$/.test(frequency) && frequency<total_days && total_days>0 ) {
+			alert(frequency);
+		}
+	});
+
+	$("input[name=\"initial\"]").click(function () {
+		var initial = $(this).val();
+		if(initial === "custom"){
+			$("#custom_time").show();
+		} else {
+			$("#custom_time").hide();
+		}
+	});
+
+	$("#start_time").change(function() {
+		var start_time = $(this).val();
+		alert(start_time);
+	});
 
 });
 
 /**
- * 字符类型的逻辑值转为数字
+ * 字符类型的逻辑值转为数字真假值
  * @param  {String} val [description]
  * @return {Number}     [description]
  */

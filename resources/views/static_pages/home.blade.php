@@ -22,27 +22,27 @@
 
     <div class="container">
         <div class="col-md-3 text-center">
-            <button type="button" class="btn btn-success">
-                <i class="fa fa-cogs fa-5x"></i>
-            </button>
+            <a type="button" class="btn btn-info super-icon">
+                <i class="fa fa-cogs"></i>
+            </a>
             <h2>完全用户定制</h2>
         </div>
         <div class="col-md-3 text-center">
-            <button type="button" class="btn btn-success">
-            <i class="fa fa-cubes fa-5x"></i>
-            </button>
+            <a type="button" class="btn btn-info super-icon">
+            <i class="fa fa-wpexplorer"></i>
+            </a>
             <h2>详尽样本筛选</h2>
         </div>
         <div class="col-md-3 text-center">
-            <button type="button" class="btn btn-success">
-            <i class="fa fa-database fa-5x"></i>
-            </button>
-            <h2>全行业横板</h2>
+            <a type="button" class="btn btn-info super-icon">
+            <i class="fa fa-cubes"></i>
+            </a>
+            <h2>全行业模板</h2>
         </div>
         <div class="col-md-3 text-center">
-            <button type="button" class="btn btn-success">
-            <i class="fa fa-tachometer fa-5x"></i>
-            </button>
+            <a type="button" class="btn btn-info super-icon">
+            <i class="fa fa-line-chart"></i>
+            </a>
             <h2>统计图表丰富</h2>
         </div>
     </div>

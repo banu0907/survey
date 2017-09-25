@@ -27,12 +27,13 @@ class CreateSurveysTable extends Migration
             $table->string('collect_type')->nullable()->comment('收集方式');
             $table->string('edit_responses')->nullable()->comment('允许修改');
             $table->string('make_anonymous')->nullable()->comment('匿名');
-            $table->boolean('instant_results')->default(false)->nullable()->comment('即时结果');
-            $table->boolean('use_ssl')->default(false)->nullable()->comment('SSL 加密');
+            $table->string('instant_results')->nullable()->comment('即时结果');
+            $table->string('use_ssl')->nullable()->comment('SSL 加密');
             $table->dateTime('start_time')->nullable()->comment('开始时间');
             $table->dateTime('end_time')->nullable()->comment('截止结束时间');
             $table->integer('max_responses')->unsigned()->nullable()->comment('回复限制');
             $table->string('ipaccess')->nullable()->comment('IP限制');
+            $table->text('ip_list')->nullable()->comment('IP列表');
             $table->string('password_protection')->nullable()->comment('密码保护');
             $table->integer('person_time')->unsigned()->default(0)->comment('使用人次');
             $table->integer('replies_sum')->unsigned()->default(0)->comment('使用总次数');
