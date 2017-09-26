@@ -18,18 +18,6 @@ $(function () {
 
 
 
-	$("#start_time").ECalendar({
-			 type:"time",
-			 stamp:false,
-			 skin:5,
-			 format:"yyyy年mm月dd日 hh时ii分",
-			 callback:function(v,e)
-			 {
-				 // $(".callback span").html(v)
-				 console.log(v+ "\n"+e);
-			 }
-	});
-
 	// 多次回覆
 	$("input[name=\"allow_multiple_responses\"]").click(function () {
 		var allow_multiple_responses = $(this).val() ;
@@ -275,7 +263,7 @@ $(function () {
 
 	});
 
-
+	// ------------------------
 	// 疗程式问卷设置
 	$("input[name=\"course\"]").click(function () {
 		var course = $(this).val();
@@ -288,7 +276,7 @@ $(function () {
 				type: 'POST',
 				dataType: 'json',
 				data: {
-					course: course
+					course: "false"
 				},
 				success:function(data){
 					if (data == true) {
@@ -300,22 +288,54 @@ $(function () {
 			});
 		}
 	});
-
+	// 疗程总天数
 	var total_days = 0;
 	$("#total_days").change(function () {
 		total_days = Number($(this).val());
 		if ( /^\d+$/.test(total_days) && total_days>0 ) {
-			alert(total_days);
+			$.ajax({
+				url: app_url + '/collect/' + survey_id,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					course_days: total_days
+				},
+				success:function(data){
+					if (data == true) {
+						$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+					} else {
+						alert("更新设置失败");
+					};
+				}
+			});
 		} else {
-			total_days = 0;
+			alert('天数不能少于1');
+			$(this).val('');
 		};
 	});
-
+	// 记录频率
 	$("#frequency").change(function () {
 		var frequency = Number($(this).val());
-		if( /^\d+$/.test(frequency) && frequency<total_days && total_days>0 ) {
-			alert(frequency);
+		if( !( /^\d+$/.test(frequency) && frequency<total_days && frequency>0 && total_days>0 ) ) {
+			// alert('天数要求为整数');
+			frequency = 'false';
+			$(this).val('');
 		}
+			$.ajax({
+				url: app_url + '/collect/' + survey_id,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					course_frequency: frequency
+				},
+				success:function(data){
+					if (data == true) {
+						$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+					} else {
+						alert("更新设置失败");
+					};
+				}
+			});
 	});
 
 	$("input[name=\"initial\"]").click(function () {
@@ -324,13 +344,51 @@ $(function () {
 			$("#custom_time").show();
 		} else {
 			$("#custom_time").hide();
+			$.ajax({
+				url: app_url + '/collect/' + survey_id,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					course_start_time: 'false'
+				},
+				success:function(data){
+					if (data == true) {
+						$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+					} else {
+						alert("更新设置失败");
+					};
+				}
+			});
 		}
 	});
-
-	$("#start_time").change(function() {
-		var start_time = $(this).val();
-		alert(start_time);
+	// 时间控件
+	$("#start_time").ECalendar({
+		 type:"time",
+		 stamp:false,
+		 skin:5,
+		 format:"yyyy-mm-dd hh:ii",
+		 callback:function(v,e)
+		 {
+			 console.log(v+ "\n"+e);
+			 var start_time = String(v);
+			$.ajax({
+				url: app_url + '/collect/' + survey_id,
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					course_start_time: start_time
+				},
+				success:function(data){
+					if (data == true) {
+						$("#collect_up_info").show("slow").animate({opacity:"toggle"},2000);
+					} else {
+						alert("更新设置失败");
+					};
+				}
+			});
+		 }
 	});
+
 
 });
 

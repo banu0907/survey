@@ -91,6 +91,35 @@ class SurveyCollectController extends Controller
         	$data["ipaccess"] = $ipaccess;
         }
 
+		// 疗程式调查设置
+        if($request->course) {
+        	$course = $request->course;
+        	if ($course == "false") {
+        		$data["course_days"] = NULL;
+        	}
+        }
+
+        if ($request->course_days) {
+        	$data['course_days'] = $request->course_days;
+        }
+
+        if ($request->course_frequency) {
+        	$frequency = $request->course_frequency;
+        	if ($frequency == 'false') {
+        		$frequency = NULL;
+        	}
+        	$data['course_frequency'] = $frequency;
+        }
+
+        if ($request->course_start_time) {
+        	$start_time = $request->course_start_time;
+        	if ($start_time == "false") {
+        		$data['course_start_time'] = NULL;
+        	} else {
+        		$data['course_start_time'] = $start_time;
+        	}
+        }
+
         $updated = $survey->update($data);
         // return compact('data','end_time');
         return $updated ? "true" : "false";
