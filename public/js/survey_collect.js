@@ -316,6 +316,7 @@ $(function () {
 	// 记录频率
 	$("#frequency").change(function () {
 		var frequency = Number($(this).val());
+		total_days = $("#total_days").val();
 		if( !( /^\d+$/.test(frequency) && frequency<total_days && frequency>0 && total_days>0 ) ) {
 			// alert('天数要求为整数');
 			frequency = 'false';

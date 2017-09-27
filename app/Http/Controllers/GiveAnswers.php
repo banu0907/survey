@@ -9,7 +9,7 @@ use App\Models\Answer;
 
 class GiveAnswers extends Controller
 {
-    //
+    // 批量生成答项，以备统计之用
     
     static $survey_id;
     static function pub($survey_id)

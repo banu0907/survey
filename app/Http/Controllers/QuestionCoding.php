@@ -8,7 +8,7 @@ use App\Models\Tool;
 
 class  QuestionCoding extends Controller
 {
-    //
+    // 对问题内容进行处理，供显示和编辑之用
     static $qId;
     static $qType;
     static $qContent;

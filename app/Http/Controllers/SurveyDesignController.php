@@ -18,7 +18,7 @@ class SurveyDesignController extends Controller
      */
     public function __construct()
     {
-        
+        $this->middleware('auth');
     }
 
     // 设计主页面

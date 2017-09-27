@@ -39,7 +39,7 @@
     <div class="row">
 	    <h1>
   		<i class="fa fa-link"></i>
-    	{{ url('/') }}
+      {{ route('r',$survey) }}
     	</h1>
     </div>
 
@@ -59,13 +59,13 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="allow_multiple_responses" id="" value="true">
+            <input type="radio" name="allow_multiple_responses" value="true"{!! $survey->multiple_responses == "true" ? " checked=\"checked\"" : "" !!}>
          开启，允许多次。
          </label>
        </p>
         <p>
           <label>
-            <input type="radio" name="allow_multiple_responses" id="" checked="checked" value="false">
+            <input type="radio" name="allow_multiple_responses" value="false"{!! $survey->multiple_responses != "true" ? " checked=\"checked\"" : "" !!}>
           关闭，仅允许进行一次。
           </label>
         </p>
@@ -84,18 +84,19 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="edit-responses" id="" checked="checked" value="until_complete">开启，受访者可以任何调查问卷页面中变更答案，直到完成调查问卷
+            <input type="radio" name="edit-responses" value="until_complete"{!! $survey->edit_responses == "until_complete" ? " checked=\"checked\"" : "" !!}>
+            开启，受访者可以任何调查问卷页面中变更答案，直到完成调查问卷
           </label>
         </p>
         <p>
           <label>
-            <input type="radio" name="edit-responses" id="" value="always">
+            <input type="radio" name="edit-responses" value="always"{!! $survey->edit_responses == "always" ? " checked=\"checked\"" : "" !!}>
           开启，受访者可以完成调查问卷之后变更答案。
         </label>
       </p>
         <p>
           <label>
-            <input type="radio" name="edit-responses" id="" value="never">
+            <input type="radio" name="edit-responses" value="never"{!! $survey->edit_responses == "never" ? " checked=\"checked\"" : "" !!}>
           关闭，受访者在离开调查问卷页面之后无法变更答案。
         </label>
       </p>
@@ -114,13 +115,13 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="make-anonymous" id="" value="fully_anonymous">
+            <input type="radio" name="make-anonymous" value="fully_anonymous"{!! $survey->make_anonymous == "fully_anonymous" ? " checked=\"checked\"" : "" !!}>
           开启，你的受访者均为匿名
         </label>
       </p>
         <p>
           <label>
-            <input type="radio" name="make-anonymous" id="" checked="checked" value="not_anonymous">
+            <input type="radio" name="make-anonymous" value="not_anonymous"{!! $survey->make_anonymous != "fully_anonymous" ? " checked=\"checked\"" : "" !!}>
           关闭，在您调查问卷结果中加入受访者的IP地址
         </label>
       </p>
@@ -139,13 +140,13 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="instant-results" id="" value="true">
+            <input type="radio" name="instant-results" value="true"{!! $survey->instant_results == "true" ? " checked=\"checked\"" : "" !!}>
           开启，向受访者显示结果。
          </label>
         </p>
         <p>
           <label>
-            <input type="radio" name="instant-results" id="" checked="checked" value="false">
+            <input type="radio" name="instant-results" value="false"{!! $survey->instant_results != "true" ? " checked=\"checked\"" : "" !!}>
           关闭，不向受访者显示结果。
          </label>
         </p>
@@ -164,16 +165,16 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="cutoff-date" id="" value="true">
+            <input type="radio" name="cutoff-date" value="true"{!! $survey->end_time ? " checked=\"checked\"" : "" !!}>
           开启，在指定日期与时间关闭。
           </label>
-          <div id="cutoff-input" class="hide-input">
-            <input type="text" name="cutoff_datepicker" id="cutoff_datepicker" class="date">
+          <div id="cutoff-input"{!! $survey->end_time ? "" : " class=\"hide-input\"" !!}>
+            <input type="text" name="cutoff_datepicker" id="cutoff_datepicker" class="date" value="{{ $survey->end_time }}">
           </div>
         </p>
         <p>
           <label>
-            <input type="radio" name="cutoff-date" id="" checked="checked" value="false">
+            <input type="radio" name="cutoff-date" value="false"{!! empty($survey->end_time) ? " checked=\"checked\"" : "" !!}>
             关闭，接受回复，直到你手动关闭为止。
           </label>
         </p>
@@ -192,17 +193,17 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="max-responses" id="" value="true">
+            <input type="radio" name="max-responses" value="true"{!! $survey->max_responses ? " checked=\"checked\"" : "" !!}>
             开启，在收集到指定的回复数量之后关闭。
           </label>
-          <div id="max-responses-input" class="hide-input">
+          <div id="max-responses-input"{!! $survey->max_responses ? "" : " class=\"hide-input\"" !!}>
             输入最大回复数字
-            <input type="text" name="max-response-count" id="max-response-count">
+            <input type="text" name="max-response-count" id="max-response-count" value="{{ $survey->max_responses }}">
           </div>
         </p>
         <p>
           <label>
-            <input type="radio" name="max-responses" id="" checked="checked" value="false">
+            <input type="radio" name="max-responses" value="false"{!! empty($survey->max_responses) ? " checked=\"checked\"" : "" !!}>
           关闭，接受回复，直到你手动关闭为止。
           </label>
         </p>
@@ -221,25 +222,25 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="ipaccess" id="" value="blacklist">
+            <input type="radio" name="ipaccess" value="blacklist"{!! $survey->ipaccess == "blacklist" ? " checked=\"checked\"" : "" !!}>
             开启，封锁指定 IP 地址的电脑，使其无法回复你的调查问卷
           </label>
-          <div id="ip-b" class="hide-input">
-            <textarea name="blacklist" id="ip-blacklist" cols="60" rows="5" class="ip-list"></textarea>
+          <div id="ip-b"{!! $survey->ipaccess == "blacklist" ? "" : " class=\"hide-input\"" !!}>
+            <textarea name="blacklist" id="ip-blacklist" cols="60" rows="5" class="ip-list">{{ $survey->ip_list }}</textarea>
           </div>
         </p>
         <p>
           <label>
-            <input type="radio" name="ipaccess" id="" value="whitelist">
+            <input type="radio" name="ipaccess" value="whitelist"{!! $survey->ipaccess == "whitelist" ? " checked=\"checked\"" : "" !!}>
           开启，允许指定 IP 地址的电脑回复您的问卷。
           </label>
-          <div id="ip-w" class="hide-input">
-            <textarea name="whitelist" id="ip-whitelist" cols="60" rows="5" class="ip-list"></textarea>
+          <div id="ip-w"{!! $survey->ipaccess == "whitelist" ? "" : " class=\"hide-input\"" !!}>
+            <textarea name="whitelist" id="ip-whitelist" cols="60" rows="5" class="ip-list">{{ $survey->ip_list }}</textarea>
           </div>
         </p>
         <p>
           <label>
-            <input type="radio" name="ipaccess" id="" checked="checked" value="off">
+            <input type="radio" name="ipaccess" value="off"{!! $survey->ipaccess == "off" ? " checked=\"checked\"" : "" !!}>
           关闭，不限制任何 IP 地址回复调查问卷。
           </label>
         </p>
@@ -258,41 +259,41 @@
       <div class="panel-body">
         <p>
           <label>
-            <input type="radio" name="course" id="" value="false" checked="checked">
+            <input type="radio" name="course" value="false"{!! $survey->course_days ? "" : " checked=\"checked\"" !!}>
             不使用疗程式回复
           </label>
         </p>
         <p>
           <label>
-            <input type="radio" name="course" id="" value="true">
+            <input type="radio" name="course" value="true"{!! $survey->course_days ? " checked=\"checked\"" : "" !!}>
             开启疗程式回复
           </label>
         </p>
 
-        <blockquote id="treatment" class="hide-input">
+        <blockquote id="treatment"{!! $survey->course_days ? "" : " class=\"hide-input\"" !!}>
             <p>
               周期总时间长度
-              <input type="text" name="total_days" id="total_days" value="0">
+              <input type="text" name="total_days" id="total_days" value="{{ $survey->course_days }}">
               天
             </p>
             <p>
               回复频率
-              <input type="text" name="frequency" id="frequency" value="0">
+              <input type="text" name="frequency" id="frequency" value="{{ $survey->course_frequency }}">
               天
             </p>
             <p>
               <label>
-                <input type="radio" name="initial" id="" value="first" checked="checked">
+                <input type="radio" name="initial" value="first"{!! $survey->course_start_time ? "" : " checked=\"checked\"" !!}>
               疗程记录开始时间以第一次答卷开始算起
               </label>
             </p>
             <p>
               <label>
-                <input type="radio" name="initial" id="" value="custom">
+                <input type="radio" name="initial" value="custom"{!! $survey->course_start_time ? " checked=\"checked\"" : "" !!}>
                 疗程记录开始时间由受访者自定
               </label>
-              <div id="custom_time" class="hide-input">
-                <input type="text" name="start_time" id="start_time" class="date">
+              <div id="custom_time"{!! $survey->course_start_time ? "" : " class=\"hide-input\"" !!}>
+                <input type="text" name="start_time" id="start_time" class="date" value="{{ $survey->course_start_time }}">
               </div>
             </p>
           </blockquote>

@@ -7,6 +7,11 @@ use App\Models\Survey;
 
 class SurveyCollectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // 发布问卷动作，先发布后设置
 	public function index(Survey $survey)
 	{
@@ -49,6 +54,12 @@ class SurveyCollectController extends Controller
 		return view("collect.edit",compact('survey'));
 	}
 
+/**
+ * 问卷发布选项 更新
+ * @param  Survey  $survey  [description]
+ * @param  Request $request [description]
+ * @return [type]           [description]
+ */
 	public function update(Survey $survey,Request $request)
 	{
         $data = [];

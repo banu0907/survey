@@ -49,3 +49,6 @@ Route::post('questions/undel', 'QuestionsController@undel');
 Route::get('collect/{survey}', 'SurveyCollectController@index')->name('collect');
 Route::get('collect/{survey}/edit', 'SurveyCollectController@edit')->name('collect.edit');
 Route::post('collect/{survey}', 'SurveyCollectController@update')->name('collect.update');
+
+// 问卷测试实施
+Route::get('r/{survey}', 'RunController@show')->name('r');
