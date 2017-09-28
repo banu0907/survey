@@ -16,7 +16,12 @@ $(function () {
     });
 */
 
-
+	// 弹出新窗口
+	$(".popwindow").click(function() {
+		var url = $(this).prop("href");
+		window.open(url);
+		return false;
+	});
 
 	// 多次回覆
 	$("input[name=\"allow_multiple_responses\"]").click(function () {

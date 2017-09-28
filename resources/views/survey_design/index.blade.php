@@ -30,7 +30,7 @@
         <div class="container">
             <div class="row">
                 <div class="survey_title col-xs-6">
-                    <h2>问卷总标题</h2>
+                    <h2>{{ $survey->survey }}</h2>
                 </div>
                 <div class="col-xs-6">
                     <div class="well-sm text-right">

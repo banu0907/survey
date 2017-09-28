@@ -27,6 +27,10 @@
     position: relative;
 }
 
+#bqc a{
+    cursor: move;
+}
+
 #theme_selected {
     position: absolute;
     top: 2px;

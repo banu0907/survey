@@ -38,7 +38,9 @@
     </div>
     <div class="row">
 	    <h1>
-  		<i class="fa fa-link"></i>
+      <a href="{{ route('r',$survey) }}" class="popwindow">
+  		<i class="fa fa-link">&nbsp;</i>
+      </a>
       {{ route('r',$survey) }}
     	</h1>
     </div>
