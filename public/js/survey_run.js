@@ -1,17 +1,5 @@
 $(function() {
-    /*
-    //	点击表格单元格选中选项
-    $("td").click(function() {
-        $(this).children("input[type=\"radio\"],input[type=\"checkbox\"]").prop("checked",function (i,checkval) {
-        	return !checkval;
-        });
-    });
-    $(".checkbox").click(function() {
-        $(this).find("label>input[type=\"radio\"],label>input[type=\"checkbox\"]").prop("checked", function (i,checkval) {
-        	return !checkval;
-        });
-    });
-    */
+
     //	给导航按钮加上链接
     $(".next-button").click(function() {
         console.log("点击了下一页");
@@ -37,7 +25,5 @@ $(function() {
         $(window).scrollTop(0);
     });
 
-    $("#closePreview").click(function() {
-        $("#preview_window", window.parent.document).hide();
-    });
+
 });

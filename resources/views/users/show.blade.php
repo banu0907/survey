@@ -11,10 +11,11 @@
         </section>
     </div>
     <div class="col-md-10">
-        <ul>
-            <li><a href="#">我填写的问卷</a></li>
-            <li><a href="{{ route('surveys.index') }}">我发布的问卷</a></li>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="#">我填写的问卷</a></li>
+            <li class="list-group-item"><a href="{{ route('surveys.index') }}">我发布的问卷</a></li>
         </ul>
+
     </div>
 </div>
 @endsection
